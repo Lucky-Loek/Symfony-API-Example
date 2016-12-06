@@ -38,7 +38,7 @@ symfony.app/car/{id}
 
 ### Requirements
 
-- PHP >= 7.0
+- PHP >= 7.1
 - Composer
 - MySQL >= 5.5
 

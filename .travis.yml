@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 7.0
   - 7.1
 
 before_script:
@@ -9,7 +8,7 @@ before_script:
   - mysql -e 'create database symfony_test'
   - composer self-update
   - composer install --no-interaction
-  - php bin/console doc:mig:mig --env=test
+  - php bin/console doc:mig:mig --env=test --no-interaction
 
 script:
   - vendor/bin/phpmd src/ text phpmd.xml
