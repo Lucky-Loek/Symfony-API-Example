@@ -1,0 +1,31 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    appbundle.car_repository:
+        class: AppBundle\Repository\CarRepository
+        factory: ["@doctrine.orm.default_entity_manager", "getRepository"]
+        arguments:
+            - "AppBundle\\Entity\\Car"
+
+    appbundle.request_exception_listener:
+        class: AppBundle\EventDispatcher\Listener\InvalidRequestArgumentListener
+        tags:
+            - { name: kernel.event_listener, event:  kernel.exception, method: onInvalidRequestArgumentException}
+
+    appbundle.log.lineformatter:
+        class: Monolog\Formatter\LineFormatter
+        calls:
+            - [includeStacktraces]
+
+    appbundle.request_listener:
+        class: AppBundle\EventDispatcher\Listener\KernelRequestListener
+        arguments: ["@logger"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
