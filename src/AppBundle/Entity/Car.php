@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Webmozart\Assert\Assert;
 
 /**
- * Car
+ * Car.
  *
  * @ORM\Table(name="car")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CarRepository")
@@ -55,7 +55,7 @@ class Car
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -65,7 +65,7 @@ class Car
     }
 
     /**
-     * Set brand
+     * Set brand.
      *
      * @param string $brand
      *
@@ -81,7 +81,7 @@ class Car
     }
 
     /**
-     * Get brand
+     * Get brand.
      *
      * @return string
      */
@@ -91,7 +91,7 @@ class Car
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -107,7 +107,7 @@ class Car
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -117,9 +117,9 @@ class Car
     }
 
     /**
-     * Set year
+     * Set year.
      *
-     * @param integer $year
+     * @param int $year
      *
      * @return Car
      */
@@ -133,7 +133,7 @@ class Car
     }
 
     /**
-     * Get year
+     * Get year.
      *
      * @return int
      */

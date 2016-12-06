@@ -14,7 +14,7 @@ use Webmozart\Assert\Assert;
 class CarController extends FOSRestController
 {
     /**
-     * Get all cars
+     * Get all cars.
      *
      * @Rest\Get("/car")
      */
@@ -33,7 +33,7 @@ class CarController extends FOSRestController
     }
 
     /**
-     * Get a car by ID
+     * Get a car by ID.
      *
      * @Rest\Get("/car/{id}")
      */
@@ -48,12 +48,15 @@ class CarController extends FOSRestController
     }
 
     /**
-     * Add a car
+     * Add a car.
      *
      * @Rest\Post("/car")
+     *
      * @param Request $request
-     * @return \FOS\RestBundle\View\View
+     *
      * @throws InvalidRequestArgumentException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function postAction(Request $request)
     {
@@ -73,12 +76,15 @@ class CarController extends FOSRestController
     }
 
     /**
-     * Update a car
+     * Update a car.
      *
      * @Rest\Patch("/car/{id}")
+     *
      * @param Request $request
-     * @return \FOS\RestBundle\View\View
+     *
      * @throws InvalidRequestArgumentException
+     *
+     * @return \FOS\RestBundle\View\View
      */
     public function patchAction($id, Request $request)
     {
@@ -124,7 +130,9 @@ class CarController extends FOSRestController
 
     /**
      * @param Request $request
+     *
      * @throws InvalidRequestArgumentException
+     *
      * @return \stdClass
      */
     private function requestBodyToObject(Request $request)
@@ -156,8 +164,10 @@ class CarController extends FOSRestController
 
     /**
      * @param mixed $id
-     * @return int
+     *
      * @throws InvalidRequestArgumentException
+     *
+     * @return int
      */
     private function checkId($id)
     {
@@ -166,13 +176,16 @@ class CarController extends FOSRestController
         } catch (\Exception $e) {
             throw new InvalidRequestArgumentException($e->getMessage(), $e->getCode());
         }
+
         return (int) $id;
     }
 
     /**
      * @param $id
-     * @return Car
+     *
      * @throws InvalidRequestArgumentException
+     *
+     * @return Car
      */
     private function retrieveCarFromDb($id)
     {
@@ -180,6 +193,7 @@ class CarController extends FOSRestController
         try {
             /** @var Car $car */
             $car = $repository->find($id);
+
             return $car;
         } catch (\Exception $e) {
             throw new InvalidRequestArgumentException($e->getMessage(), $e->getCode());

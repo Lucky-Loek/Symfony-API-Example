@@ -5,7 +5,7 @@ namespace tests\AppBundle\Dto;
 use AppBundle\Dto\CarDtoAssembler;
 use AppBundle\Entity\Car;
 
-class CarDtoTest extends \PHPUnit_Framework_TestCase
+class CarDtoAssemblerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test

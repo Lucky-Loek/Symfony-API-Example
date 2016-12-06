@@ -13,18 +13,18 @@ class InvalidRequestArgumentListener
     {
         $exception = $event->getException();
         if (!($exception instanceof InvalidRequestArgumentException)) {
-            return null;
+            return;
         }
 
         $errorMessage = [
-            'code' => $exception->getCode(),
-            'message' => $exception->getMessage()
+            'code'    => $exception->getCode(),
+            'message' => $exception->getMessage(),
         ];
 
         $responseData = [
             'error' => [
-                $errorMessage
-            ]
+                $errorMessage,
+            ],
         ];
 
         if ($responseData['error'][0]['code'] === 0) {

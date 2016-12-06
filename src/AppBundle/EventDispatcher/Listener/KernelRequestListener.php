@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 class KernelRequestListener
 {
     /**
-     * @var LoggerInterface $logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -18,12 +18,12 @@ class KernelRequestListener
     }
 
     /**
-     * If a request is received by the HttpKernel, write that request to the log
+     * If a request is received by the HttpKernel, write that request to the log.
      *
      * @param GetResponseEvent $event
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        $this->logger->info('Received request: ' . $event->getRequest());
+        $this->logger->info('Received request: '.$event->getRequest());
     }
 }
