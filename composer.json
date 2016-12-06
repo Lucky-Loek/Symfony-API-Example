@@ -77,10 +77,10 @@
             "vendor/bin/phpcpd --exclude src/AppBundle/Entity src"
         ],
         "phpunit": [
-            "vendor/bin/phpunit --log-junit=tests/phpunit.xml"
+            "vendor/bin/phpunit --colors=auto"
         ],
         "behat": [
-            "vendor/bin/behat --colors"
+            "vendor/bin/behat --colors --format=pretty"
         ]
     },
     "extra": {
