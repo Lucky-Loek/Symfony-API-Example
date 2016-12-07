@@ -3,7 +3,6 @@
 namespace tests\AppBundle\Entity;
 
 use AppBundle\Entity\Car;
-use InvalidArgumentException;
 
 class CarTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +16,7 @@ class CarTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function shouldThrowExceptionOnInvalidInput()
     {
@@ -35,7 +34,7 @@ class CarTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function shouldThrowExceptionOnUpdateWithInvalidData()
     {
