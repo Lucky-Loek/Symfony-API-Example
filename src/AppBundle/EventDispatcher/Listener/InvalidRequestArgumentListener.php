@@ -17,7 +17,7 @@ class InvalidRequestArgumentListener
         }
 
         $errorMessage = [
-            'code'    => $exception->getCode(),
+            'code' => $exception->getCode(),
             'message' => $exception->getMessage(),
         ];
 
