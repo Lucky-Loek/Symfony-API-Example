@@ -172,7 +172,7 @@ class CarController extends FOSRestController
     private function checkId($id)
     {
         try {
-            Assert::integerish($id);
+            Assert::integerish($id, 'ID should be a string');
         } catch (\Exception $e) {
             throw new InvalidRequestArgumentException($e->getMessage(), $e->getCode());
         }

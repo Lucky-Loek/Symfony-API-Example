@@ -28,7 +28,7 @@ class InvalidRequestArgumentListener
         ];
 
         if ($responseData['error'][0]['code'] === 0) {
-            $responseData['errors'][0]['code'] = Response::HTTP_BAD_REQUEST;
+            $responseData['error'][0]['code'] = Response::HTTP_BAD_REQUEST;
         }
 
         $event->setResponse(new JsonResponse($responseData, Response::HTTP_BAD_REQUEST));

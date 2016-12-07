@@ -60,3 +60,19 @@ Feature: API calling
     Then the response status code should be 200
     And the response should be in JSON
     And the JSON node "message" should be equal to "Car deleted"
+
+  Scenario: See a useful message when sending invalid data
+    Given I send a "GET" request to "/car/asdf"
+    Then the response status code should be 400
+    And the response should be in JSON
+    And the JSON node "error[0].code" should be equal to 400
+    And the JSON node "error[0].message" should be equal to "ID should be a string"
+
+    When I send a "POST" request to "/car" with body:
+    """
+
+    """
+    Then the response status code should be 400
+    And the response should be in JSON
+    And the JSON node "error[0].code" should be equal to 400
+    And the JSON node "error[0].message" should be equal to "No body given"
