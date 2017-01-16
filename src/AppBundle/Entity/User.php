@@ -113,7 +113,7 @@ class User implements UserInterface, Serializable
      * @return (Role|string)[] The user roles
      */
     public function getRoles() {
-        return array('ROLE_USER');
+        return ['ROLE_USER'];
     }
 
     /**
