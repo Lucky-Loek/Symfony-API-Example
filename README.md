@@ -50,6 +50,7 @@ symfony.app/car/{id}
 1. Clone this repo
 2. Run `composer install`
 3. Run `php bin/console doc:mig:mig`
+4. Run `php bin/console doc:fixtures:load`
 
 ### Testing
 
