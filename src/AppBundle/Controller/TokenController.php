@@ -18,15 +18,18 @@ class TokenController extends Controller
      */
     public function newTokenAction(Request $request)
     {
+        $username = $request->headers->get('username');
+        $password = $request->headers->get('password');
+
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
-        $user = $repository->findOneBy(['username' => $request->getUser()]);
+        $user = $repository->findOneBy(['username' => $username]);
 
         if (is_null($user)) {
             throw new BadCredentialsException();
         }
 
         $encoder = $this->get('security.password_encoder');
-        $passwordValid = $encoder->isPasswordValid($user, $request->getPassword());
+        $passwordValid = $encoder->isPasswordValid($user, $password);
 
         if (!$passwordValid) {
             throw new BadCredentialsException();
