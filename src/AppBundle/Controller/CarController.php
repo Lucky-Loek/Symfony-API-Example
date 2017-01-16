@@ -51,8 +51,11 @@ class CarController extends FOSRestController
      * Add a car.
      *
      * @Rest\Post("/car")
+     *
      * @param Request $request
+     *
      * @throws InvalidRequestArgumentException
+     *
      * @return \FOS\RestBundle\View\View
      */
     public function postCarAction(Request $request)
@@ -76,8 +79,11 @@ class CarController extends FOSRestController
      * Update a car.
      *
      * @Rest\Patch("/car/{id}")
+     *
      * @param Request $request
+     *
      * @throws InvalidRequestArgumentException
+     *
      * @return \FOS\RestBundle\View\View
      */
     public function patchCarAction($id, Request $request)
@@ -90,7 +96,7 @@ class CarController extends FOSRestController
 
         $bodyData = (array) $body;
         $carProperties = $car->getProperties();
-        
+
         $carProperties = array_replace($carProperties, $bodyData);
         $car = $car->setProperties($carProperties);
 
@@ -120,7 +126,9 @@ class CarController extends FOSRestController
 
     /**
      * @param Request $request
+     *
      * @throws InvalidRequestArgumentException
+     *
      * @return \stdClass
      */
     private function requestBodyToObject(Request $request)
@@ -152,7 +160,9 @@ class CarController extends FOSRestController
 
     /**
      * @param mixed $id
+     *
      * @throws InvalidRequestArgumentException
+     *
      * @return int
      */
     private function checkId($id)
@@ -168,7 +178,9 @@ class CarController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @throws InvalidRequestArgumentException
+     *
      * @return Car
      */
     private function retrieveCarFromDb($id)
