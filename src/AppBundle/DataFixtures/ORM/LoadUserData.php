@@ -20,7 +20,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
      *
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $user = new User();
 
         $plainPassword = 'unsafepassword';
@@ -39,7 +40,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null
      */
-    public function setContainer(ContainerInterface $container = NULL) {
+    public function setContainer(ContainerInterface $container = null)
+    {
         $this->container = $container;
     }
 }

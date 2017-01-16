@@ -112,7 +112,8 @@ class User implements UserInterface, Serializable
      *
      * @return (Role|string)[] The user roles
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         return ['ROLE_USER'];
     }
 
@@ -123,7 +124,8 @@ class User implements UserInterface, Serializable
      *
      * @return string|null The salt
      */
-    public function getSalt() {
+    public function getSalt()
+    {
         return null;
     }
 
@@ -133,7 +135,8 @@ class User implements UserInterface, Serializable
      * This is important if, at any given point, sensitive information like
      * the plain-text password is stored on this object.
      */
-    public function eraseCredentials() {
+    public function eraseCredentials()
+    {
     }
 
     /**
@@ -142,7 +145,8 @@ class User implements UserInterface, Serializable
      * @return string the string representation of the object or null
      * @since 5.1.0
      */
-    public function serialize() {
+    public function serialize()
+    {
         return serialize([
             $this->id,
             $this->username,
@@ -159,7 +163,8 @@ class User implements UserInterface, Serializable
      * @return void
      * @since 5.1.0
      */
-    public function unserialize($serialized) {
+    public function unserialize($serialized)
+    {
         list (
             $this->id,
             $this->username,
@@ -167,4 +172,3 @@ class User implements UserInterface, Serializable
             ) = unserialize($serialized);
     }
 }
-

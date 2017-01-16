@@ -51,7 +51,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return Response
      */
-    public function start(Request $request, AuthenticationException $authException = NULL) {
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
         return new JsonResponse([
             'error' => 'Auth required'
         ], 401);
@@ -83,7 +84,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return mixed|null
      */
-    public function getCredentials(Request $request) {
+    public function getCredentials(Request $request)
+    {
         $tokenExctractor = new AuthorizationHeaderTokenExtractor(
             'Bearer',
             'Authorization'
@@ -113,7 +115,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return UserInterface|null
      */
-    public function getUser($credentials, UserProviderInterface $userProvider) {
+    public function getUser($credentials, UserProviderInterface $userProvider)
+    {
         try {
             $data = $this->encoder->decode($credentials);
         } catch (JWTDecodeFailureException $e) {
@@ -143,7 +146,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @throws AuthenticationException
      */
-    public function checkCredentials($credentials, UserInterface $user) {
+    public function checkCredentials($credentials, UserInterface $user)
+    {
         // We've done all stuff like password checking before, so nothing needs to happen here
         return true;
     }
@@ -162,7 +166,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return Response|null
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
         // TODO: Implement onAuthenticationFailure() method.
     }
 
@@ -181,7 +186,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return Response|null
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey) {
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+    {
         return null;
     }
 
@@ -198,7 +204,8 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      *
      * @return bool
      */
-    public function supportsRememberMe() {
+    public function supportsRememberMe()
+    {
         return false;
     }
 }

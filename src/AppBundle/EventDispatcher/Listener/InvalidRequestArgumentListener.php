@@ -27,10 +27,13 @@ class InvalidRequestArgumentListener
             ],
         ];
 
+        $statusCode = $exception->getCode();
+
         if ($responseData['error'][0]['code'] === 0) {
             $responseData['error'][0]['code'] = Response::HTTP_BAD_REQUEST;
+            $statusCode = Response::HTTP_BAD_REQUEST;
         }
 
-        $event->setResponse(new JsonResponse($responseData, Response::HTTP_BAD_REQUEST));
+        $event->setResponse(new JsonResponse($responseData, $statusCode));
     }
 }
