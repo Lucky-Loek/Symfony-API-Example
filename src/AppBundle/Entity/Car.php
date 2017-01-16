@@ -55,21 +55,24 @@ class Car
     }
 
     /**
-     * Returns the properties of this object
+     * Returns the properties of this object.
      *
      * @return array
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return get_object_vars($this);
     }
 
     /**
-     * Set the properties of this object
+     * Set the properties of this object.
      *
      * @param array $properties
+     *
      * @return Car $this
      */
-    public function setProperties(array $properties) {
+    public function setProperties(array $properties)
+    {
         $this->id = $properties['id'];
         $this->brand = $properties['brand'];
         $this->name = $properties['name'];
