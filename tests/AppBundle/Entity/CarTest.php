@@ -29,7 +29,11 @@ class CarTest extends \PHPUnit_Framework_TestCase
     public function shouldUpdateWithValidData()
     {
         $car = new Car('Testbrand', 'Testname', 2016);
-        $car->setName('Bettertestname');
+        $properties = $car->getProperties();
+        $properties['id'] = 1;
+        $properties['name'] = 'Bettertestname';
+        $car->setProperties($properties);
+        $this->assertEquals($car->getProperties()['name'], 'Bettertestname');
     }
 
     /**
@@ -39,6 +43,8 @@ class CarTest extends \PHPUnit_Framework_TestCase
     public function shouldThrowExceptionOnUpdateWithInvalidData()
     {
         $car = new Car('Testbrand', 'Testname', 2016);
-        $car->setName(null);
+        $properties = $car->getProperties();
+        $properties['name'] = null;
+        $car->setProperties($properties);
     }
 }

@@ -90,7 +90,7 @@ class CarController extends FOSRestController
 
         $bodyData = (array) $body;
         $carProperties = $car->getProperties();
-        
+
         $carProperties = array_replace($carProperties, $bodyData);
         $car = $car->setProperties($carProperties);
 

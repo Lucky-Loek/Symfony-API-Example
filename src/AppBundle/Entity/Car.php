@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -59,7 +60,8 @@ class Car
      *
      * @return array
      */
-    public function getProperties() {
+    public function getProperties()
+    {
         return get_object_vars($this);
     }
 
@@ -69,7 +71,14 @@ class Car
      * @param array $properties
      * @return Car $this
      */
-    public function setProperties(array $properties) {
+    public function setProperties(array $properties)
+    {
+        foreach ($properties as $key => $property) {
+            if (is_null($property)) {
+                throw new InvalidArgumentException('Property ' . $key . ' can not be null');
+            }
+        }
+
         $this->id = $properties['id'];
         $this->brand = $properties['brand'];
         $this->name = $properties['name'];
