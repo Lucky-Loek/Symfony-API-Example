@@ -19,11 +19,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        default:
-            anonymous: ~
-            http_basic: ~
-            provider: database_provider
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+        main:
+            pattern: ^/car
+            anonymous: true
+            stateless: true
 
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            guard:
+                authenticators:
+                    - 'appbundle.jwt_token_authenticator'
