@@ -66,7 +66,7 @@ Feature: API calling
     Then the response status code should be 400
     And the response should be in JSON
     And the JSON node "error[0].code" should be equal to 400
-    And the JSON node "error[0].message" should be equal to "ID should be a string"
+    And the JSON node "error[0].message" should be equal to "ID should be an integer"
 
     When I send a "POST" request to "/car" with body:
     """
