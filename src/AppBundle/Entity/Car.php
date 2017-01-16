@@ -56,7 +56,7 @@ class Car
     }
 
     /**
-     * Returns the properties of this object
+     * Returns the properties of this object.
      *
      * @return array
      */
@@ -66,16 +66,17 @@ class Car
     }
 
     /**
-     * Set the properties of this object
+     * Set the properties of this object.
      *
      * @param array $properties
+     *
      * @return Car $this
      */
     public function setProperties(array $properties)
     {
         foreach ($properties as $key => $property) {
             if (is_null($property)) {
-                throw new InvalidArgumentException('Property ' . $key . ' can not be null');
+                throw new InvalidArgumentException('Property '.$key.' can not be null');
             }
         }
 

@@ -7,8 +7,8 @@ use AppBundle\Entity\Car;
 class CarDtoAssembler
 {
     /**
-    * @return CarDto
-    */
+     * @return CarDto
+     */
     public static function createFromEntity(Car $car)
     {
         $dto = new CarDto();
