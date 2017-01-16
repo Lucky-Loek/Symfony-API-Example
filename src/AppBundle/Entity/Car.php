@@ -55,90 +55,26 @@ class Car
     }
 
     /**
-     * Get id.
+     * Returns the properties of this object
      *
-     * @return int
+     * @return array
      */
-    public function getId()
-    {
-        return $this->id;
+    public function getProperties() {
+        return get_object_vars($this);
     }
 
     /**
-     * Set brand.
+     * Set the properties of this object
      *
-     * @param string $brand
-     *
-     * @return Car
+     * @param array $properties
+     * @return Car $this
      */
-    public function setBrand($brand)
-    {
-        Assert::notNull($brand, 'Brand can not be null');
-        Assert::string($brand, 'Brand should be a string');
-        $this->brand = $brand;
+    public function setProperties(array $properties) {
+        $this->id = $properties['id'];
+        $this->brand = $properties['brand'];
+        $this->name = $properties['name'];
+        $this->year = $properties['year'];
 
         return $this;
-    }
-
-    /**
-     * Get brand.
-     *
-     * @return string
-     */
-    public function getBrand()
-    {
-        return $this->brand;
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return Car
-     */
-    public function setName($name)
-    {
-        Assert::notNull($name, 'Name can not be null');
-        Assert::string($name, 'Name should be a string');
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set year.
-     *
-     * @param int $year
-     *
-     * @return Car
-     */
-    public function setYear($year)
-    {
-        Assert::notNull($year, 'Year can not be null');
-        Assert::integerish($year, 'Year should be an integer');
-        $this->year = (int) $year;
-
-        return $this;
-    }
-
-    /**
-     * Get year.
-     *
-     * @return int
-     */
-    public function getYear()
-    {
-        return $this->year;
     }
 }
