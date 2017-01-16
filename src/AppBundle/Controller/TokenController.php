@@ -37,6 +37,9 @@ class TokenController extends Controller
 
         $tokenEncoder = $this->get('lexik_jwt_authentication.encoder');
         $token = $tokenEncoder->encode([
+            // This is why JWT is incredibly awesome: we can just encode the username IN the token
+            // Later we can decode the token and easily search for a matching user because we have the username
+            // No need for storing tokens in the DB anymore! :)
             'username' => $user->getUsername(),
             'exp' => time() + 600
         ]);
