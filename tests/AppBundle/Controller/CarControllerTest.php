@@ -3,7 +3,7 @@
 namespace tests\AppBundle\Controller;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\ClientException;
 
 class CarControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class CarControllerTest extends \PHPUnit_Framework_TestCase
      * @test
      */
     public function shouldThrow401OnUnauthorizedUserRequest() {
-        $this->expectException(ServerException::class);
+        $this->expectException(ClientException::class);
         $this->client->request('GET', 'car');
     }
 }

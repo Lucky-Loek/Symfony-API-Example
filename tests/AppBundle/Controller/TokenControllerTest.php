@@ -3,7 +3,8 @@
 namespace tests\AppBundle\Controller;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request;
 
 class TokenControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,9 +24,16 @@ class TokenControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldCreateTokenOnValidCredentials()
     {
-        $response = $this->client->post('/api/token', [
-            'auth' => ['admin', 'unsafepassword']
-        ]);
+        $request = new Request(
+            'POST',
+            '/api/token',
+            [
+                'username' => 'admin',
+                'password' => 'unsafepassword'
+            ]
+        );
+
+        $response = $this->client->send($request);
 
         $body = $response->getBody()->getContents();
         $body = json_decode($body);
@@ -39,10 +47,17 @@ class TokenControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowExceptionOnInvalidCredentials()
     {
-        $this->expectException(ServerException::class);
+        $this->expectException(ClientException::class);
 
-        $this->client->post('/api/token', [
-            'auth' => ['admin', 'reallysafepassword']
-        ]);
+        $request = new Request(
+            'POST',
+            '/api/token',
+            [
+                'username' => 'admin',
+                'password' => 'reallysafepassword'
+            ]
+        );
+
+        $response = $this->client->send($request);
     }
 }
