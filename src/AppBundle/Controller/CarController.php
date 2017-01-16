@@ -10,7 +10,13 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * Class CarController
+ * @package AppBundle\Controller
+ * @Security("is_granted('ROLE_USER')")
+ */
 class CarController extends FOSRestController
 {
     /**
