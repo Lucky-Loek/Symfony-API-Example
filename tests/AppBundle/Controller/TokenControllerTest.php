@@ -3,7 +3,7 @@
 namespace tests\AppBundle\Controller;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 
 class TokenControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,7 +39,7 @@ class TokenControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowExceptionOnInvalidCredentials()
     {
-        $this->expectException(ClientException::class);
+        $this->expectException(ServerException::class);
 
         $this->client->post('/api/token', [
             'auth' => ['admin', 'reallysafepassword']
