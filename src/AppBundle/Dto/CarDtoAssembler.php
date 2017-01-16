@@ -6,13 +6,18 @@ use AppBundle\Entity\Car;
 
 class CarDtoAssembler
 {
+    /**
+    * @return CarDto
+    */
     public static function createFromEntity(Car $car)
     {
         $dto = new CarDto();
-        $dto->id = $car->getId();
-        $dto->brand = $car->getBrand();
-        $dto->name = $car->getName();
-        $dto->year = $car->getYear();
+        $properties = $car->getProperties();
+
+        $dto->id = $properties['id'];
+        $dto->brand = $properties['brand'];
+        $dto->name = $properties['name'];
+        $dto->year = $properties['year'];
 
         return $dto;
     }

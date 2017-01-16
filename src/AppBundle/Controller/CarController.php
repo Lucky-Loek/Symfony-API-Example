@@ -51,14 +51,11 @@ class CarController extends FOSRestController
      * Add a car.
      *
      * @Rest\Post("/car")
-     *
      * @param Request $request
-     *
      * @throws InvalidRequestArgumentException
-     *
      * @return \FOS\RestBundle\View\View
      */
-    public function postAction(Request $request)
+    public function postCarAction(Request $request)
     {
         $data = $this->requestBodyToObject($request);
 
@@ -79,30 +76,23 @@ class CarController extends FOSRestController
      * Update a car.
      *
      * @Rest\Patch("/car/{id}")
-     *
      * @param Request $request
-     *
      * @throws InvalidRequestArgumentException
-     *
      * @return \FOS\RestBundle\View\View
      */
-    public function patchAction($id, Request $request)
+    public function patchCarAction($id, Request $request)
     {
         $id = $this->checkId($id);
 
-        $data = $this->requestBodyToObject($request);
-
         $car = $this->retrieveCarFromDb($id);
 
-        if (isset($data->brand)) {
-            $car->setBrand($data->brand);
-        }
-        if (isset($data->name)) {
-            $car->setName($data->name);
-        }
-        if (isset($data->year)) {
-            $car->setYear($data->year);
-        }
+        $body = json_decode($request->getContent());
+
+        $bodyData = (array) $body;
+        $carProperties = $car->getProperties();
+        
+        $carProperties = array_replace($carProperties, $bodyData);
+        $car = $car->setProperties($carProperties);
 
         $this->saveCarToDatabase($car);
 
@@ -114,7 +104,7 @@ class CarController extends FOSRestController
     /**
      * @Rest\Delete("/car/{id}")
      */
-    public function deleteAction($id)
+    public function deleteCarAction($id)
     {
         $id = $this->checkId($id);
 
@@ -130,9 +120,7 @@ class CarController extends FOSRestController
 
     /**
      * @param Request $request
-     *
      * @throws InvalidRequestArgumentException
-     *
      * @return \stdClass
      */
     private function requestBodyToObject(Request $request)
@@ -164,15 +152,13 @@ class CarController extends FOSRestController
 
     /**
      * @param mixed $id
-     *
      * @throws InvalidRequestArgumentException
-     *
      * @return int
      */
     private function checkId($id)
     {
         try {
-            Assert::integerish($id, 'ID should be a string');
+            Assert::integerish($id, 'ID should be an integer');
         } catch (\Exception $e) {
             throw new InvalidRequestArgumentException($e->getMessage(), $e->getCode());
         }
@@ -182,9 +168,7 @@ class CarController extends FOSRestController
 
     /**
      * @param $id
-     *
      * @throws InvalidRequestArgumentException
-     *
      * @return Car
      */
     private function retrieveCarFromDb($id)
