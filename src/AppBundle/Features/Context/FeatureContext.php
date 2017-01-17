@@ -6,10 +6,8 @@ use AppBundle\Entity\Car;
 use AppBundle\Entity\User;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use Sanpi\Behatch\Context\RestContext;
 
@@ -101,7 +99,7 @@ class FeatureContext implements Context
         $this->restContext->iAddHeaderEqualTo('username', $this->user['username']);
         $this->restContext->iAddHeaderEqualTo('password', $this->user['password']);
 
-        $response = $this->restContext->iSendARequestTo('POST', $this->getContainer()->getParameter('app_url') . '/api/token');
+        $response = $this->restContext->iSendARequestTo('POST', $this->getContainer()->getParameter('app_url').'/api/token');
 
         $body = $response->getContent();
 
@@ -115,6 +113,6 @@ class FeatureContext implements Context
      */
     public function iAddThatTokenToMyRequestAsAuthorizationHeader()
     {
-        $this->restContext->iAddHeaderEqualTo('Authorization', 'Bearer '. $this->token);
+        $this->restContext->iAddHeaderEqualTo('Authorization', 'Bearer '.$this->token);
     }
 }
