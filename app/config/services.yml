@@ -29,3 +29,7 @@ services:
         arguments: ["@logger"]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    appbundle.jwt_token_authenticator:
+        class: AppBundle\Security\JwtTokenAuthenticator
+        arguments: ["@lexik_jwt_authentication.encoder", "@doctrine.orm.entity_manager"]

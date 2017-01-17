@@ -10,6 +10,7 @@
 !var/logs/.gitkeep
 !/var/sessions
 /var/sessions/*
+!/var/jwt
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/

@@ -1,14 +1,18 @@
 # Symfony API Example
 
-[![Build Status](https://travis-ci.org/loekiedepo/Symfony-API-Example.svg?branch=master)](https://travis-ci.org/loekiedepo/Symfony-API-Example)
-[![StyleCI](https://styleci.io/repos/75643731/shield?branch=master)](https://styleci.io/repos/75643731)
+[![Build Status](https://travis-ci.org/loekiedepo/Symfony-API-Example.svg?branch=with-authentication)](https://travis-ci.org/loekiedepo/Symfony-API-Example)
+[![StyleCI](https://styleci.io/repos/75643731/shield?branch=with-authentication)](https://styleci.io/repos/75643731)
 
 A small example of how an API could be written in Symfony. This project allow a user to receive/add/update/delete cars.
 
 All output is standardized so that it is easy to parse in any language on any environment.
 
+This branch features an implementation of [JSON Web Tokens](https://jwt.io/) for authenticating users.
+
 ## Features
 
+- JWT Authentication
+   - [GET token](#get-a-token)
 - Data retrieval
    - [GET all entities](#get-all-entities)
    - [GET entity by id](#get-entity-by-id)
@@ -20,20 +24,23 @@ All output is standardized so that it is easy to parse in any language on any en
 
 ## URLS
 
-```
-// GET
+```bash
+# POST retrieve a token
+symfony.app/api/token
+
+# GET car
 symfony.app/car
 
-// GET by id
+# GET car by id
 symfony.app/car/{id}
 
-// POST new
+# POST new car
 symfony.app/car
 
-// PATCH update
+# PATCH update car
 symfony.app/car/{id}
 
-// DELETE remove
+# DELETE remove car
 symfony.app/car/{id}
 ```
 
@@ -50,23 +57,62 @@ symfony.app/car/{id}
 1. Clone this repo
 2. Run `composer install`
 3. Run `php bin/console doc:mig:mig`
+4. Run `php bin/console doc:fixtures:load`
 
 ### Testing
 
 1. Run `php bin/console doc:mig:mig --env=test`
-2. Run `composer test`
+2. Run `php bin/console doc:fixtures:load --env=test`
+3. Run `composer test`
 
-For more information which tests are run, please refer to the `"test"` section of `composer.json`
+For more information which tests are run, please refer to the `"test"` section of `composer.json`.
+You can run the given tests separately, i.e. `composer behat` or `composer phpunit`
 
 ## Technical Docs
 
+### Error messages
+
+All error messages have the same format, so they can be easily parsed in any language:
+
+```JSON
+{
+    "error": {
+        "code": 401,
+        "message": "Not privileged to request the resource."
+    }
+}
+```
+
+### GET a token
+
+#### Request
+```bash
+$ curl --request POST \
+    --url http://symfony.app/api/token \
+    --header 'password: unsafepassword' \
+    --header 'username: admin'
+```
+
+#### Response
+```JSON
+{
+	"token": "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNDg0NTgyNTc4LCJpYXQiOjE0ODQ1ODE5Nzh9.t31C2jYVHWybZ2szEFwkGEzspYFyg9BlTyolnYtznnm8eFPIZI00hZPYCPFX2Ka7-gBFb3keM_2WVhfXKvreQpaFzge2HQ1lfMgVBCCUsxoiESUo6qCkna0Vb6ttv1qLyBRAqui_ijjANaAqEgO648vnIP0BMOYkjzw9-jNJNRQ25Bv4Y7bc_LGcGJQc2wGlg5sxWqMYhHwwCncBNPpdwTj9e9WULGBv0U1Hc_8I5eCrQFrCJGeQaKnEiy1GKXdRCSqwfCqEDrbXhgkBGygUbPGAYrfU8SnrtxFRI_EN92PByo2rjpy_M5gL-Md6czN5xDSxJHmswValR-I1ga1WkqEf194erD7KJmRRXUpz1HwNDWPDm1RJfzVgj0vTlW7kCKdLqGkkvaVnPuToxLhAPnp-kfdFkprtND0J8CajdiKaYVia4DwOjK4w_lbnfLMzZp6s6o7eKQ4h7_vkZAGu_DA0f6fVOuGQc5cqef_1oMqbKKrhVWL4xMg9wovpkAm_AF-iii-cjaXejArKzZ_4sKku5fc7BleSIHH0sXXLWlE_bI6ftc3AAxTl1buIOwpqrKDwlU_YfO8d9YkuZCRG-I0B8Nu0hfW6qh3jwIaqlqaAP6ZqAfAk8Sd6cQw8eqSqjhFjtSKA2J-DYn4lP2DC-0-_6ydj8sl3pB-DV7MEVVI"
+}
+```
+
 ### GET all entities
-```shell
-# Request
+
+#### Request
+
+```bash
 $ curl --request GET \
-    --url http://symfony.app/car
-  
-# Response
+    --url http://symfony.app/car \
+    --header 'Authorization: Bearer {token}'
+```
+
+#### Response
+
+```JSON
 [
     {
         "id": 1,
@@ -85,12 +131,17 @@ $ curl --request GET \
 ```
 
 ### GET entity by id
-```shell
-# Request
+
+#### Request
+
+```bash
 $ curl --request GET \
-    --url http://symfony.app/car/1
-  
-# Response
+    --url http://symfony.app/car/{id} \
+    --header 'Authorization: Bearer {token}'
+```
+
+#### Response
+```JSON
 {
     "id": 1,
     "brand": "Ford",
@@ -100,18 +151,23 @@ $ curl --request GET \
 ```
 
 ### POST new entity
-```shell
-# Request
+
+#### Request
+
+```bash
 $ curl --request POST \
     --url http://symfony.app/car \
     --header 'content-type: application/json' \
+    --header 'Authorization: Bearer {token}'
     --data '{
 	  "brand": "Ford",
 	  "name": "Mustang",
 	  "year": 1972
   }'
-  
-# Response
+```
+
+#### Response
+```JSON
 {
     "id": 1,
     "brand": "Ford",
@@ -121,16 +177,20 @@ $ curl --request POST \
 ```
 
 ### PATCH update existing entity
-```shell
-# Request
+
+#### Request
+```bash
 $ curl --request PATCH \
-    --url http://symfony.app/car/1 \
+    --url http://symfony.app/car/{id} \
     --header 'content-type: application/json' \
+    --header 'Authorization: Bearer {token} \
     --data '{
       "year": 2016
   }'
-  
-# Response
+```
+
+#### Response
+```JSON
 {
     "id": 1,
     "brand": "Ford",
@@ -140,12 +200,16 @@ $ curl --request PATCH \
 ```
 
 ### DELETE remove existing entity
-```shell
-# Request
-$ curl --request DELETE \
-    --url http://symfony.app/car/1
 
-# Response
+#### Request
+```bash
+$ curl --request DELETE \
+    --url http://symfony.app/car/{id} \
+    --header 'Authorization: Bearer {token}
+```
+
+#### Response
+```JSON
 {
     "message": "Car deleted"
 }
