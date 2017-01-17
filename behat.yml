@@ -3,7 +3,6 @@ default:
         Behat\Symfony2Extension: ~
         Sanpi\Behatch\Extension: ~
         Behat\MinkExtension:
-            base_url: http://symfony.app
             sessions:
                 default:
                     symfony2: ~

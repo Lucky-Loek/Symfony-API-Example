@@ -9,6 +9,8 @@ before_script:
   - composer self-update
   - composer install --no-interaction
   - php bin/console doc:mig:mig --env=test --no-interaction
+  - cat app/config/parameters.yml
+  - php bin/console server:start
 
 script:
   - vendor/bin/phpmd src/ text phpmd.xml
@@ -16,3 +18,6 @@ script:
   - vendor/bin/phpcpd --exclude src/AppBundle/Entity src
   - vendor/bin/phpunit --colors=auto
   - vendor/bin/behat --colors --format=pretty
+
+after_script:
+  - php bin/console server:stop
