@@ -1,7 +1,7 @@
 # Symfony API Example
 
-[![Build Status](https://travis-ci.org/loekiedepo/Symfony-API-Example.svg?branch=master)](https://travis-ci.org/loekiedepo/Symfony-API-Example)
-[![StyleCI](https://styleci.io/repos/75643731/shield?branch=master)](https://styleci.io/repos/75643731)
+[![Build Status](https://travis-ci.org/loekiedepo/Symfony-API-Example.svg?branch=with-authentication)](https://travis-ci.org/loekiedepo/Symfony-API-Example)
+[![StyleCI](https://styleci.io/repos/75643731/shield?branch=with-authentication)](https://styleci.io/repos/75643731)
 
 A small example of how an API could be written in Symfony. This project allow a user to receive/add/update/delete cars.
 
