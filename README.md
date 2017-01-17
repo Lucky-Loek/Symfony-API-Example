@@ -1,13 +1,13 @@
 # Symfony API Example
 
-[![Build Status](https://travis-ci.org/loekiedepo/Symfony-API-Example.svg?branch=with-authentication)](https://travis-ci.org/loekiedepo/Symfony-API-Example)
-[![StyleCI](https://styleci.io/repos/75643731/shield?branch=with-authentication)](https://styleci.io/repos/75643731)
+[![Build Status](https://travis-ci.org/loekiedepo/Symfony-API-Example.svg?branch=master)](https://travis-ci.org/loekiedepo/Symfony-API-Example)
+[![StyleCI](https://styleci.io/repos/75643731/shield?branch=master)](https://styleci.io/repos/75643731)
 
 A small example of how an API could be written in Symfony. This project allow a user to receive/add/update/delete cars.
 
 All output is standardized so that it is easy to parse in any language on any environment.
 
-This branch features an implementation of [JSON Web Tokens](https://jwt.io/) for authenticating users.
+It now also features an implementation of [JSON Web Tokens](https://jwt.io/) for authenticating users.
 
 ## Features
 
@@ -21,6 +21,20 @@ This branch features an implementation of [JSON Web Tokens](https://jwt.io/) for
    - [PATCH update existing entity](#patch-update-existing-entity)
    - [DELETE remove existing entity](#delete-removing-existing-entity)
    
+## Important!
+
+There are two SSH keys in `/var/jwt`. These encrypt all the tokens we send and read. I have committed
+them for the ease of use and testing, but remember to ALWAYS generate new ones and keep them secret
+in your own applications. See the [official documentation](https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#getting-started) on how to do this.
+
+## Workflow
+
+1. Register user (manually or through fixture. May add easier registration on request)
+2. User retrieves token
+3. User consumes API
+4. Token times out after 10 minutes
+
+![Workflow sequence](http://imgur.com/J514Tv1)   
 
 ## URLS
 
@@ -62,8 +76,7 @@ symfony.app/car/{id}
 ### Testing
 
 1. Run `php bin/console doc:mig:mig --env=test`
-2. Run `php bin/console doc:fixtures:load --env=test`
-3. Run `composer test`
+2. Run `composer test`
 
 For more information which tests are run, please refer to the `"test"` section of `composer.json`.
 You can run the given tests separately, i.e. `composer behat` or `composer phpunit`
