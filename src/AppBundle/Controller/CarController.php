@@ -13,8 +13,8 @@ use Webmozart\Assert\Assert;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * Class CarController
- * @package AppBundle\Controller
+ * Class CarController.
+ *
  * @Security("is_granted('ROLE_USER')")
  */
 class CarController extends FOSRestController

@@ -12,16 +12,18 @@ class CarControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected $client;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->client = new Client([
-            'base_uri' => 'http://symfony.app'
+            'base_uri' => 'http://symfony.app',
         ]);
     }
 
     /**
      * @test
      */
-    public function shouldThrow401OnUnauthorizedUserRequest() {
+    public function shouldThrow401OnUnauthorizedUserRequest()
+    {
         $this->expectException(ClientException::class);
         $this->client->request('GET', 'car');
     }

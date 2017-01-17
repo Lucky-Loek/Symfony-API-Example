@@ -16,7 +16,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     protected $container;
 
     /**
-     * Load data fixtures with the passed EntityManager
+     * Load data fixtures with the passed EntityManager.
      *
      * @param ObjectManager $manager
      */

@@ -7,7 +7,7 @@ use Serializable;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
@@ -37,9 +37,8 @@ class User implements UserInterface, Serializable
      */
     private $password;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -49,7 +48,7 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Set username
+     * Set username.
      *
      * @param string $username
      *
@@ -63,7 +62,7 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Get username
+     * Get username.
      *
      * @return string
      */
@@ -73,7 +72,7 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Set password
+     * Set password.
      *
      * @param string $password
      *
@@ -87,7 +86,7 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * Get password
+     * Get password.
      *
      * @return string
      */
@@ -140,9 +139,12 @@ class User implements UserInterface, Serializable
     }
 
     /**
-     * String representation of object
-     * @link  http://php.net/manual/en/serializable.serialize.php
+     * String representation of object.
+     *
+     * @see  http://php.net/manual/en/serializable.serialize.php
+     *
      * @return string the string representation of the object or null
+     *
      * @since 5.1.0
      */
     public function serialize()
@@ -150,22 +152,24 @@ class User implements UserInterface, Serializable
         return serialize([
             $this->id,
             $this->username,
-            $this->password
+            $this->password,
         ]);
     }
 
     /**
-     * Constructs the object
-     * @link  http://php.net/manual/en/serializable.unserialize.php
+     * Constructs the object.
+     *
+     * @see  http://php.net/manual/en/serializable.unserialize.php
+     *
      * @param string $serialized <p>
      *                           The string representation of the object.
      *                           </p>
-     * @return void
+     *
      * @since 5.1.0
      */
     public function unserialize($serialized)
     {
-        list (
+        list(
             $this->id,
             $this->username,
             $this->password

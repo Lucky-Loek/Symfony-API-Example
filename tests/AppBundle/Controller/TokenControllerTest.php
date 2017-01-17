@@ -13,9 +13,10 @@ class TokenControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected $client;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->client = new Client([
-            'base_uri' => 'http://symfony.app'
+            'base_uri' => 'http://symfony.app',
         ]);
     }
 
@@ -29,7 +30,7 @@ class TokenControllerTest extends \PHPUnit_Framework_TestCase
             '/api/token',
             [
                 'username' => 'admin',
-                'password' => 'unsafepassword'
+                'password' => 'unsafepassword',
             ]
         );
 
@@ -54,7 +55,7 @@ class TokenControllerTest extends \PHPUnit_Framework_TestCase
             '/api/token',
             [
                 'username' => 'admin',
-                'password' => 'reallysafepassword'
+                'password' => 'reallysafepassword',
             ]
         );
 
