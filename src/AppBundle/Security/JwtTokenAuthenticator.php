@@ -53,9 +53,14 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        return new JsonResponse([
-            'error' => 'Auth required',
-        ], 401);
+        $errorMessage = [
+            'error' => [
+                'code' => 401,
+                'message' => $authException->getMessageKey()
+            ]
+        ];
+
+        return new JsonResponse($errorMessage, 401);
     }
 
     /**

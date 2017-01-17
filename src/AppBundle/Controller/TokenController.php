@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Exception\InvalidRequestArgumentException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class TokenController extends Controller
 {
@@ -24,14 +24,14 @@ class TokenController extends Controller
         $user = $repository->findOneBy(['username' => $username]);
 
         if (is_null($user)) {
-            throw new InvalidRequestArgumentException('User not found', 401);
+            throw new BadCredentialsException('User not found', 401);
         }
 
         $encoder = $this->get('security.password_encoder');
         $passwordValid = $encoder->isPasswordValid($user, $password);
 
         if (!$passwordValid) {
-            throw new InvalidRequestArgumentException('Password invalid', 401);
+            throw new BadCredentialsException('Password invalid', 401);
         }
 
         $tokenEncoder = $this->get('lexik_jwt_authentication.encoder');
